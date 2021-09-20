@@ -223,7 +223,7 @@ def pygmo_serach(
 ) -> List[Individual]:
     #print(AsyncEvaluator.defaults)   
     #current_population = output
-    print("Iterations succesive after doble", iters)
+    print("Iterations succesive after para AutoMLBenchmark", iters)
     successive = False
     #Create a folder to save the invididuals
     path_use = os.getcwd()

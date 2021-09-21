@@ -231,7 +231,8 @@ def pygmo_serach(
     path = path + "/pickle_gama"
 
     try: 
-        os.mkdir(path) 
+        #os.mkdir(path) 
+        os.makedirs(path, exist_ok=True)
     except: 
         path = path + "/list_successive_halving.pkl"
         list_successive_halving = pickle.load(open(path, "rb"))

@@ -263,6 +263,9 @@ def pygmo_serach(
         list_successive_halving = pickle.load(open(path, "rb"))
         if len(list_successive_halving)<5:
             successive = True
+        elif len(list_successive_halving)==5:
+            eliminar = True
+    
     
     if not successive:
         print("Fist step")

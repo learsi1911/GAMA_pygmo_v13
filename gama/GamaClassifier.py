@@ -14,6 +14,9 @@ from gama.configuration.classification import clf_config
 from gama.utilities.metrics import scoring_to_metric
 import psutil # Search_pygmo
 import time # Search_pygmo
+import os # Search_pygmo
+import sys # Search_pygmo
+import shutil # Search_pygmo
 
 def on_terminate(proc):
     print("process {} terminated with exit code {}".format(proc, proc.returncode))
@@ -195,6 +198,15 @@ class GamaClassifier(Gama):
         #******************
         #Hasta aqui
         
+        # Delete pickle folder
+        print("Eliminar folder python")
+        path_use = os.getcwd()
+        path = path_use.replace(os.sep, '/')
+        path = path + "/pickle_gama"
+        try:
+            shutil.rmtree(path)
+        except OSError as e:
+            print("Error: %s - %s." % (e.filename, e.strerror))
         
         # # segundo punto, descomentar desde aqui
         # y_ = y.squeeze() if isinstance(y, pd.DataFrame) else y

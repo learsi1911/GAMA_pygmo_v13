@@ -186,7 +186,7 @@ class Gama(ABC):
         # Descomentar/comentar lo siguiente
         print("max_eval_time", max_total_time)
         if max_total_time is not None:
-            max_total_time = int(max_total_time/5)
+            max_total_time = int(max_total_time/6)
         print("New time is", max_total_time)
         # Hasta aqui
         

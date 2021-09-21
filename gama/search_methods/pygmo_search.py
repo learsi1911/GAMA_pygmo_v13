@@ -239,7 +239,18 @@ def pygmo_serach(
         print("len list_successive_halving", len(list_successive_halving))
         if len(list_successive_halving)==5:
             eliminar = True
-    
+            
+    if eliminar:
+        path_use = os.getcwd()
+        path = path_use.replace(os.sep, '/')
+        path = path + "/pickle_gama/"
+        for root, dirs, files, in os.walk(path):
+            for file in files:
+                if file.endswith(".pkl"):
+                    name_file = path + file
+                    os.remove(name_file)
+                    # if file == "buscar.pkl":
+                    #     os.remove(file)
     # if eliminar:
     #     path_use = os.getcwd()
     #     path = path_use.replace(os.sep, '/')

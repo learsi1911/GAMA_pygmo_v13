@@ -464,7 +464,23 @@ def pygmo_serach(
             if f_vectors[i] == -np.inf:
                 f_vectors[i] = -10000
             pop.push_back(x = x_vectors[i], f = [-f_vectors[i]])
-        archi = pg.archipelago(n=islands, algo=algo, pop=pop, t=pg.topology(pg.ring()))
+            
+        archi = pg.archipelago(t=pg.topology(pg.ring()))
+        isl1 = pg.island(algo = pg.algorithm(pg.de(gen = iters)), pop=pop)
+        isl2 = pg.island(algo = pg.algorithm(pg.sade(gen = iters)), pop=pop)
+        isl3 = pg.island(algo = pg.algorithm(pg.de1220(gen = iters)), pop=pop)
+        isl4 = pg.island(algo = pg.algorithm(pg.gwo(gen = iters)), pop=pop)
+        isl5 = pg.island(algo = pg.algorithm(pg.pso(gen = iters)), pop=pop)
+        isl6 = pg.island(algo = pg.algorithm(pg.pso_gen(gen = iters)), pop=pop)
+        isl7 = pg.island(algo = pg.algorithm(pg.sea(gen = iters)), pop=pop)
+        isl8 = pg.island(algo = pg.algorithm(pg.bee_colony(gen = iters)), pop=pop)
+        isls = [isl1, isl2, isl3, isl4, isl5, isl6, isl7, isl8]
+
+        for isl in isls:
+            archi.push_back(isl)
+        print("Acabo de CREAR EL ARCHIPELAGO, EMPEZARÉ A EVOLUCIONAR EN PARALELO")
+        
+        #archi = pg.archipelago(n=islands, algo=algo, pop=pop, t=pg.topology(pg.ring()))
         print("CREATION OF THE ARCHIPELAGO, IT WILL START THE EVOLUTION IN PARALLEL")
         print(archi) 
         archi.get_champions_f() 

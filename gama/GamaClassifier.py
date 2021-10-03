@@ -44,15 +44,14 @@ class GamaClassifier(Gama):
             }
             
         # Delete from here
-        # Remove all the .pkl files
+        print("Eliminar folder python")
         path_use = os.getcwd()
         path = path_use.replace(os.sep, '/')
-        path = path + "/pickle_gama/"
-        for root, dirs, files, in os.walk(path):
-            for file in files:
-                if file.endswith(".pkl"):
-                    name_file = path + file
-                    os.remove(name_file)
+        path = path + "/pickle_gama"
+        try:
+            shutil.rmtree(path)
+        except OSError as e:
+            print("Error: %s - %s." % (e.filename, e.strerror))
         # To here
 
         self._label_encoder = None

@@ -42,6 +42,18 @@ class GamaClassifier(Gama):
                     and not hasattr(alg(), "predict_proba")
                 )
             }
+            
+        # Delete from here
+        # Remove all the .pkl files
+        path_use = os.getcwd()
+        path = path_use.replace(os.sep, '/')
+        path = path + "/pickle_gama/"
+        for root, dirs, files, in os.walk(path):
+            for file in files:
+                if file.endswith(".pkl"):
+                    name_file = path + file
+                    os.remove(name_file)
+        # To here
 
         self._label_encoder = None
         super().__init__(*args, **kwargs, config=config, scoring=scoring)

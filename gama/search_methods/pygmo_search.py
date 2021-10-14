@@ -322,8 +322,8 @@ def pygmo_serach(
             pop.push_back(x = x_vectors[i], f = [-f_vectors[i]])
             
         # archi = pg.archipelago(t=pg.topology(pg.ring()))
-        # archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
-        archi = pg.archipelago(t=pg.topology(pg.free_form()))
+        archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
+        # archi = pg.archipelago(t=pg.topology(pg.free_form()))
         isl1 = pg.island(algo = pg.algorithm(pg.de(gen = iters)), pop=pop)
         isl2 = pg.island(algo = pg.algorithm(pg.sade(gen = iters)), pop=pop)
         isl3 = pg.island(algo = pg.algorithm(pg.de1220(gen = iters)), pop=pop)
@@ -481,8 +481,8 @@ def pygmo_serach(
             pop.push_back(x = x_vectors[i], f = [-f_vectors[i]])
             
         # archi = pg.archipelago(t=pg.topology(pg.ring()))
-        # archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
-        archi = pg.archipelago(t=pg.topology(pg.free_form()))
+        archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
+        # archi = pg.archipelago(t=pg.topology(pg.free_form()))
         isl1 = pg.island(algo = pg.algorithm(pg.de(gen = iters)), pop=pop)
         isl2 = pg.island(algo = pg.algorithm(pg.sade(gen = iters)), pop=pop)
         isl3 = pg.island(algo = pg.algorithm(pg.de1220(gen = iters)), pop=pop)

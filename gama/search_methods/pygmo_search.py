@@ -313,7 +313,7 @@ def pygmo_serach(
                   
         print("START with pygmo")    
         algo = pg.algorithm(pg.de(gen = iters))
-        prob = pg.problem(AutoMLProblem(ops))        
+        prob = pg.problem(AutoMLProblem(ops))    
         # The initial population
         pop = pg.population(prob)
         for i in range(len(x_vectors)):
@@ -321,11 +321,19 @@ def pygmo_serach(
                 f_vectors[i] = -10000
             pop.push_back(x = x_vectors[i], f = [-f_vectors[i]])
             
+        # # Changes from here
+        r_policy = pg.r_policy(pg.fair_replace(rate=0.5)) # Share 50% of the individulas en each island
+        s_policy = pg.s_policy(udsp=pg.select_best())
+        archi = pg.archipelago(r_pol=r_policy, s_pol=s_policy, t=pg.topology(pg.fully_connected()))
+        broadcast = pg.migration_type(1) # 1 = Broadcast type
+        archi.set_migration_type(broadcast)
+        # # To here
+        
         # archi = pg.archipelago(t=pg.topology(pg.ring()))
         # archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
         # archi = pg.archipelago(t=pg.topology(pg.free_form()))
         # archi = pg.archipelago() # unconnected topology
-        archi = pg.archipelago(t=pg.topology(pg.base_bgl_topology()))
+        # archi = pg.archipelago(t=pg.topology(pg.base_bgl_topology())) # this doesn't work, is only the base of a topology
         isl1 = pg.island(algo = pg.algorithm(pg.de(gen = iters)), pop=pop)
         isl2 = pg.island(algo = pg.algorithm(pg.sade(gen = iters)), pop=pop)
         isl3 = pg.island(algo = pg.algorithm(pg.de1220(gen = iters)), pop=pop)
@@ -482,11 +490,19 @@ def pygmo_serach(
                 f_vectors[i] = -10000
             pop.push_back(x = x_vectors[i], f = [-f_vectors[i]])
             
+        # # Changes from here
+        r_policy = pg.r_policy(pg.fair_replace(rate=0.5)) # Share 50% of the individulas en each island
+        s_policy = pg.s_policy(udsp=pg.select_best())
+        archi = pg.archipelago(r_pol=r_policy, s_pol=s_policy, t=pg.topology(pg.fully_connected()))
+        broadcast = pg.migration_type(1) # 1 = Broadcast type
+        archi.set_migration_type(broadcast)
+        # # To here
+        
         # archi = pg.archipelago(t=pg.topology(pg.ring()))
         # archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
         # archi = pg.archipelago(t=pg.topology(pg.free_form()))
         # archi = pg.archipelago() # unconnected topology
-        archi = pg.archipelago(t=pg.topology(pg.base_bgl_topology()))
+        # archi = pg.archipelago(t=pg.topology(pg.base_bgl_topology())) # this doesn't work, is only the base of a topology
         isl1 = pg.island(algo = pg.algorithm(pg.de(gen = iters)), pop=pop)
         isl2 = pg.island(algo = pg.algorithm(pg.sade(gen = iters)), pop=pop)
         isl3 = pg.island(algo = pg.algorithm(pg.de1220(gen = iters)), pop=pop)

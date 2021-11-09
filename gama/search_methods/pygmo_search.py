@@ -436,7 +436,7 @@ def pygmo_serach(
             # for individual in start_candidates:
             for i in range(10):
                 result = ops.evaluate(start_candidates[i])
-                new_ind = result.start_candidates[i]
+                new_ind = result.individual
                 loss = new_ind.fitness.values[0]
                 f_vectors.append(loss)
                 output.append(new_ind)

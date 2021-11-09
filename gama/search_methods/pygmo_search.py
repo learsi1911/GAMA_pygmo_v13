@@ -425,7 +425,34 @@ def pygmo_serach(
             output = new_warm_start + support_to_successive
         else:
             print("Usaré los individuos")
-            output = top(elementos=10)
+            # warm starting only 10 individuals
+            
+            # lista_aux = []
+            
+            f_vectors = []
+            path_use = os.getcwd()
+            path = path_use.replace(os.sep, '/')
+            path = path + "/pickle_gama/" + "warm_start" + ".pkl"
+            # for individual in start_candidates:
+            for i in range(10):
+                result = ops.evaluate(start_candidates[i])
+                new_ind = result.start_candidates[i]
+                loss = new_ind.fitness.values[0]
+                f_vectors.append(loss)
+                output.append(new_ind)
+                with open(path, 'wb') as f:
+                    pickle.dump(output, f)
+                    
+            print("############################################")
+            
+            for por in output:
+                print(por)
+            
+            print("############################################")
+                
+            print("Ya convertí el warm-start en vectores successive, new method")
+                                
+            output = output + top(elementos=10)
             if len(output) == 0:
                 path_use = os.getcwd()
                 path = path_use.replace(os.sep, '/')

@@ -715,8 +715,33 @@ class Gama(ABC):
             with stopit.ThreadingTimeout(timeout):
                 self._search_method.dynamic_defaults(self._x, self._y, timeout)
                 self._search_method.search(self._operator_set, start_candidates=pop)
-        except KeyboardInterrupt:
-            log.info("Search phase terminated because of Keyboard Interrupt.")
+        except: 
+            self._final_pop = self._search_method.output
+            if isinstance(self._search_method, SearchPygmo) and (len(self._final_pop)<=50): #Porque ya no estamos considerando una variable independiente el "output" en el metodo de busqueda
+                print("la población venía vacía")
+                path_use = os.getcwd()
+                path = path_use.replace(os.sep, '/')
+                path = path + "/pickle_gama/"
+                for root, dirs, files, in os.walk(path):
+                    for file in files:
+                        if file.endswith(".pkl"):
+                            new_f_path = path + file
+                            if (file=="list_successive_halving.pkl") or (file=="archipelago_champions.pkl"):
+                                print(file)
+                            else:
+                                try:
+                                    new_lista = pickle.load(open(new_f_path, "rb"))
+                                except:
+                                    print("Exception", file)
+                                    new_lista = []
+                                self._final_pop = self._final_pop + new_lista
+            else:
+                self._final_pop = self._search_method.output
+                
+        # Decomment from here
+        # except KeyboardInterrupt:
+        #    log.info("Search phase terminated because of Keyboard Interrupt.")
+        # To here
         self._final_pop = self._search_method.output
         print("Longitud de la población final en gama.py", len(self._final_pop))
         #if isinstance(self._search_method, SearchPygmo) and (len(self._final_pop)==0):

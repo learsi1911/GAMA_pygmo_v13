@@ -321,15 +321,15 @@ def pygmo_serach(
                 f_vectors[i] = -10000
             pop.push_back(x = x_vectors[i], f = [-f_vectors[i]])
             
-        # Changes from here (comment/decomment and comment/decomment any line of "archi = pg.archipelago(KIND OF TOPOLOGY)")
-        r_policy = pg.r_policy(pg.fair_replace(rate=0.5)) # Share 50% of the individulas en each island
-        s_policy = pg.s_policy(udsp=pg.select_best())
-        archi = pg.archipelago(r_pol=r_policy, s_pol=s_policy, t=pg.topology(pg.fully_connected()))
-        broadcast = pg.migration_type(1) # 1 = Broadcast type
-        archi.set_migration_type(broadcast)
-        # To here
+        # # Changes from here (comment/decomment and comment/decomment any line of "archi = pg.archipelago(KIND OF TOPOLOGY)")
+        # r_policy = pg.r_policy(pg.fair_replace(rate=0.5)) # Share 50% of the individulas en each island
+        # s_policy = pg.s_policy(udsp=pg.select_best())
+        # archi = pg.archipelago(r_pol=r_policy, s_pol=s_policy, t=pg.topology(pg.fully_connected()))
+        # broadcast = pg.migration_type(1) # 1 = Broadcast type
+        # archi.set_migration_type(broadcast)
+        # # To here
         
-        # archi = pg.archipelago(t=pg.topology(pg.ring()))
+        archi = pg.archipelago(t=pg.topology(pg.ring()))
         # archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
         # archi = pg.archipelago(t=pg.topology(pg.free_form()))
         # archi = pg.archipelago() # unconnected topology
@@ -517,15 +517,15 @@ def pygmo_serach(
                 f_vectors[i] = -10000
             pop.push_back(x = x_vectors[i], f = [-f_vectors[i]])
             
-        # Changes from here (comment/decomment and comment/decomment any line of "archi = pg.archipelago(KIND OF TOPOLOGY)")
-        r_policy = pg.r_policy(pg.fair_replace(rate=0.5)) # Share 50% of the individulas en each island
-        s_policy = pg.s_policy(udsp=pg.select_best())
-        archi = pg.archipelago(r_pol=r_policy, s_pol=s_policy, t=pg.topology(pg.fully_connected()))
-        broadcast = pg.migration_type(1) # 1 = Broadcast type
-        archi.set_migration_type(broadcast)
-        # To here
+        # # Changes from here (comment/decomment and comment/decomment any line of "archi = pg.archipelago(KIND OF TOPOLOGY)")
+        # r_policy = pg.r_policy(pg.fair_replace(rate=0.5)) # Share 50% of the individulas en each island
+        # s_policy = pg.s_policy(udsp=pg.select_best())
+        # archi = pg.archipelago(r_pol=r_policy, s_pol=s_policy, t=pg.topology(pg.fully_connected()))
+        # broadcast = pg.migration_type(1) # 1 = Broadcast type
+        # archi.set_migration_type(broadcast)
+        # # To here
         
-        # archi = pg.archipelago(t=pg.topology(pg.ring()))
+        archi = pg.archipelago(t=pg.topology(pg.ring()))
         # archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
         # archi = pg.archipelago(t=pg.topology(pg.free_form()))
         # archi = pg.archipelago() # unconnected topology

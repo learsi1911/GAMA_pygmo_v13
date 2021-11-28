@@ -329,8 +329,8 @@ def pygmo_serach(
         # archi.set_migration_type(broadcast)
         # # To here
         
-        archi = pg.archipelago(t=pg.topology(pg.ring()))
-        # archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
+        # archi = pg.archipelago(t=pg.topology(pg.ring()))
+        archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
         # archi = pg.archipelago(t=pg.topology(pg.free_form()))
         # archi = pg.archipelago() # unconnected topology
         # archi = pg.archipelago(t=pg.topology(pg.base_bgl_topology())) # this doesn't work, is only the base of a topology
@@ -525,8 +525,8 @@ def pygmo_serach(
         # archi.set_migration_type(broadcast)
         # # To here
         
-        archi = pg.archipelago(t=pg.topology(pg.ring()))
-        # archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
+        # archi = pg.archipelago(t=pg.topology(pg.ring()))
+        archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
         # archi = pg.archipelago(t=pg.topology(pg.free_form()))
         # archi = pg.archipelago() # unconnected topology
         # archi = pg.archipelago(t=pg.topology(pg.base_bgl_topology())) # this doesn't work, is only the base of a topology

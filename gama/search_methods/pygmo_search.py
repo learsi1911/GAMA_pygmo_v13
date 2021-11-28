@@ -158,32 +158,32 @@ class AutoMLProblem(object):
         instance_individual = ValuesSearchSpace(x)
         individual_from_x = instance_individual.get_individuals()
         if individual_from_x == None:
-            print("El individuo era None")
+            # print("El individuo era None")
             f1 = -1000
         else:
             try:
                 if individual_from_x != None:
                     individual_to_use = self._loss_function(self.operator, individual_from_x)
-                    print("Individual evaluated with PyGMO Search Multi-Archipelago 50 generations", individual_to_use)
+                    # print("Individual evaluated with PyGMO Search Multi-Archipelago 50 generations", individual_to_use)
                     f1 = individual_to_use.fitness.values[0]
                     if f1 == -np.inf:
                         f1 = -1000
                     if -f1 < self.old_loss:
                         self.old_loss = -f1
-                        print("The loss is lower than the previous one", self.old_loss)
+                        # print("The loss is lower than the previous one", self.old_loss)
                         self.output.append(individual_to_use)
                         
-                        print("El camino es: ", path)
+                        # print("El camino es: ", path)
                         self.name = self.name_previous + str(uuid.uuid4())
                         path_use = os.getcwd()
                         path = path_use.replace(os.sep, '/')
                         path = path + "/pickle_gama/" + self.name + ".pkl"
-                        print("Nuevo camino es: ", path)
+                        # print("Nuevo camino es: ", path)
                                 
                         with open(path, 'wb') as f:
                             pickle.dump(self.output, f)
                 else:
-                    print("Voy a imprimir el individuo", individual_to_use)
+                    # print("Voy a imprimir el individuo", individual_to_use)
                     f1 = -1000
             except:
                 f1 = -1000
@@ -321,16 +321,16 @@ def pygmo_serach(
                 f_vectors[i] = -10000
             pop.push_back(x = x_vectors[i], f = [-f_vectors[i]])
             
-        # # Changes from here (comment/decomment and comment/decomment any line of "archi = pg.archipelago(KIND OF TOPOLOGY)")
-        # r_policy = pg.r_policy(pg.fair_replace(rate=0.5)) # Share 50% of the individulas en each island
-        # s_policy = pg.s_policy(udsp=pg.select_best())
-        # archi = pg.archipelago(r_pol=r_policy, s_pol=s_policy, t=pg.topology(pg.fully_connected()))
-        # broadcast = pg.migration_type(1) # 1 = Broadcast type
-        # archi.set_migration_type(broadcast)
-        # # To here
+        # Changes from here (comment/decomment and comment/decomment any line of "archi = pg.archipelago(KIND OF TOPOLOGY)")
+        r_policy = pg.r_policy(pg.fair_replace(rate=0.5)) # Share 50% of the individulas en each island
+        s_policy = pg.s_policy(udsp=pg.select_best())
+        archi = pg.archipelago(r_pol=r_policy, s_pol=s_policy, t=pg.topology(pg.fully_connected()))
+        broadcast = pg.migration_type(1) # 1 = Broadcast type
+        archi.set_migration_type(broadcast)
+        # To here
         
         # archi = pg.archipelago(t=pg.topology(pg.ring()))
-        archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
+        # archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
         # archi = pg.archipelago(t=pg.topology(pg.free_form()))
         # archi = pg.archipelago() # unconnected topology
         # archi = pg.archipelago(t=pg.topology(pg.base_bgl_topology())) # this doesn't work, is only the base of a topology
@@ -459,7 +459,7 @@ def pygmo_serach(
                 path = path + "/pickle_gama/"
                 for root, dirs, files, in os.walk(path):
                     for file in files:
-                        print(file)
+                        #print(file)
                         if file.endswith(".pkl"):
                             new_f_path = path + file
                             if (file=="list_successive_halving.pkl"):
@@ -500,14 +500,14 @@ def pygmo_serach(
             new_vector = instance_individual_to_vectors(i)
             x_vectors.append(new_vector)
             
-        print("Ya convertí el warm-start en vectores, new method")
+        #print("Ya convertí el warm-start en vectores, new method")
                   
-        print("START with pygmo")    
+        #print("START with pygmo")    
         #new_iters=iters
         new_iters = int(iters*len(list_successive_halving))
-        print("new_iters", new_iters)
-        print("len list_successive_halving", len(list_successive_halving))
-        print("new_iters", new_iters)
+        #print("new_iters", new_iters)
+        #print("len list_successive_halving", len(list_successive_halving))
+        #print("new_iters", new_iters)
         algo = pg.algorithm(pg.de(gen = new_iters))
         prob = pg.problem(AutoMLProblem(ops))        
         # The initial population
@@ -517,16 +517,16 @@ def pygmo_serach(
                 f_vectors[i] = -10000
             pop.push_back(x = x_vectors[i], f = [-f_vectors[i]])
             
-        # # Changes from here (comment/decomment and comment/decomment any line of "archi = pg.archipelago(KIND OF TOPOLOGY)")
-        # r_policy = pg.r_policy(pg.fair_replace(rate=0.5)) # Share 50% of the individulas en each island
-        # s_policy = pg.s_policy(udsp=pg.select_best())
-        # archi = pg.archipelago(r_pol=r_policy, s_pol=s_policy, t=pg.topology(pg.fully_connected()))
-        # broadcast = pg.migration_type(1) # 1 = Broadcast type
-        # archi.set_migration_type(broadcast)
-        # # To here
+        # Changes from here (comment/decomment and comment/decomment any line of "archi = pg.archipelago(KIND OF TOPOLOGY)")
+        r_policy = pg.r_policy(pg.fair_replace(rate=0.5)) # Share 50% of the individulas en each island
+        s_policy = pg.s_policy(udsp=pg.select_best())
+        archi = pg.archipelago(r_pol=r_policy, s_pol=s_policy, t=pg.topology(pg.fully_connected()))
+        broadcast = pg.migration_type(1) # 1 = Broadcast type
+        archi.set_migration_type(broadcast)
+        # To here
         
         # archi = pg.archipelago(t=pg.topology(pg.ring()))
-        archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
+        # archi = pg.archipelago(t=pg.topology(pg.fully_connected()))
         # archi = pg.archipelago(t=pg.topology(pg.free_form()))
         # archi = pg.archipelago() # unconnected topology
         # archi = pg.archipelago(t=pg.topology(pg.base_bgl_topology())) # this doesn't work, is only the base of a topology
@@ -542,24 +542,24 @@ def pygmo_serach(
 
         for isl in isls:
             archi.push_back(isl)
-        print("Acabo de CREAR EL ARCHIPELAGO, EMPEZARÉ A EVOLUCIONAR EN PARALELO")
+        # print("Acabo de CREAR EL ARCHIPELAGO, EMPEZARÉ A EVOLUCIONAR EN PARALELO")
         
         #archi = pg.archipelago(n=islands, algo=algo, pop=pop, t=pg.topology(pg.ring()))
-        print("CREATION OF THE ARCHIPELAGO, IT WILL START THE EVOLUTION IN PARALLEL")
-        print(archi) 
+        # print("CREATION OF THE ARCHIPELAGO, IT WILL START THE EVOLUTION IN PARALLEL")
+        # print(archi) 
         archi.get_champions_f() 
-        print(archi.get_champions_f()) 
+        # print(archi.get_champions_f()) 
         archi.evolve()
         archi.wait()
         archi.wait_check()
         archi.get_champions_f() 
-        print(archi.get_champions_f()) 
-        print("IT JUST FINISH")
+        # print(archi.get_champions_f()) 
+        # print("IT JUST FINISH")
         print(archi)
-        print("Let's start with the iterative process")
-        print("len archi.get_champions_f()", len(archi.get_champions_f()))
-        print("len archi.get_champions_x()[0]", len(archi.get_champions_x()[0]))
-        print("len archi.get_champions_x()", len(archi.get_champions_x()))
+        # print("Let's start with the iterative process")
+        # print("len archi.get_champions_f()", len(archi.get_champions_f()))
+        # print("len archi.get_champions_x()[0]", len(archi.get_champions_x()[0]))
+        # print("len archi.get_champions_x()", len(archi.get_champions_x()))
     
             
         # final_lista = []
